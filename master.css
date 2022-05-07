@@ -1,0 +1,57 @@
+.navbar-logo{
+    width: 3rem;
+    margin-right: 0.6rem;
+}
+.headers{
+    text-align: center;
+
+}
+.coin-image{
+    width: 55px;
+    margin-right: 0.6rem;
+}
+.coin-container{
+    text-align: center;
+}
+
+.btn {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+  }
+  h2{
+      margin: 2rem 0;
+  }
+  h1{
+      margin: 3rem 0;
+  }
+  .rulas{
+      width: 2rem;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+  }
+  .results{
+      margin-bottom: 100px;
+  }
