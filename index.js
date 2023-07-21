@@ -43,6 +43,7 @@ const modsValue = [0, 0, 0, 0, 0, 0, 0, 0];
 const coinValue = [0, 0, 0, 0, 0, 0, 0, 0];
 
 let boxTill = document.getElementById("resultTill");
+let desgloseTill = document.getElementById("resumeTill");
 let boxTotal = document.getElementById("resultTotal");
 let importeCaja = document.getElementById("cajaInput");
 let importeVentaNeta = document.getElementById("ventaNetaInput");
@@ -95,16 +96,41 @@ function tillCalc() {
   let dif1 = moneyTotal - 150;
   let dif2 = dif1;
 
+  function desgloseDisplay() {
+    desgloseTill.innerHTML = `DESGLOSE DE BILLETES<br>`;
+    for (i = 0; i < 6; i++) {
+      if (bilAmt[i] === 0 || bilAmt[i] === "0" || bilAmt[i] === "") {
+      } else if (bilAmt[i] == 1) {
+        desgloseTill.insertAdjacentHTML(
+          "beforeend",
+          `- ${bilAmt[i]} billete de ${noteName[i]} = ${bil[i]}€.<br>`
+        );
+      } else {
+        desgloseTill.insertAdjacentHTML(
+          "beforeend",
+          `- ${bilAmt[i]} billetes de ${noteName[i]} = ${bil[i]}€.<br>`
+        );
+      }
+    }
+    desgloseTill.insertAdjacentHTML("beforeend", "---------------<br>");
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      `Suma de Billetes: ${bil.reduce((partialSum, a) => partialSum + a, 0)}€.`
+    );
+  }
   // Aquí se calcula la diferencia y los billetes/monedas a entregar.
   if (moneyTotal < 150) {
     boxTill.innerHTML = `Tienes, en total, ${moneyTotal.toFixed(
       2
     )}€. Tienes menos de 150€! Esto no debería pasar... No te habrás olvidado de algo?<br>`;
+    desgloseDisplay();
     importeCaja.value = dif2.toFixed(2);
   } else if (moneyTotal === 150) {
     boxTill.innerHTML = `Tienes exactamente 150€! Qué suerte... No deberías entregar nada de caja, supongo.<br>`;
     importeCaja.value = dif2.toFixed(2);
+    desgloseDisplay();
   } else {
+    desgloseDisplay();
     boxTill.innerHTML = `Tienes, en total, ${moneyTotal.toFixed(
       2
     )}€. Lo siguiente sería entregar ${dif1.toFixed(2)}€ al mando. <br>
@@ -119,7 +145,7 @@ function tillCalc() {
       }
 
       if (bilAmt[i] === 0 || bilAmt[i] === "0" || bilAmt[i] === "") {
-      } else if (bilAmt[i] === 1) {
+      } else if (bilAmt[i] == 1) {
         boxTill.insertAdjacentHTML(
           "beforeend",
           `- ${bilAmt[i]} billete de ${noteName[i]}.<br>`
@@ -142,7 +168,7 @@ function tillCalc() {
       }
 
       if (coinAmt[i] === 0 || coinAmt[i] === "0" || coinAmt[i] === "") {
-      } else if (coinAmt[i] === 1) {
+      } else if (coinAmt[i] == 1) {
         boxTill.insertAdjacentHTML(
           "beforeend",
           `- ${coinAmt[i]} moneda de ${coinName[i]}.<br>`
