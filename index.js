@@ -85,7 +85,7 @@ function tillCalc() {
     // ahora se le añade el valor de las rulas
     modsAmt[i] = document.getElementById(inputMods[i]).value;
     modsValue[i] = modsAmt[i] * mods[i];
-    eur[i] = coinValue[i] + modsValue[i];
+    eur[i] = roundTo(coinValue[i] + modsValue[i], 2);
 
     // alert(`${capCoinName[i]}: ${coinAmt[i]} monedas y ${modsAmt[i]} rulas. ${eur[i]}€ en total, de los cuales ${coinValue[i]}€ son en monedas y ${modsValue[i]}€ son en rulas.`);
   }
@@ -97,7 +97,7 @@ function tillCalc() {
   let dif2 = dif1;
 
   function desgloseDisplay() {
-    desgloseTill.innerHTML = `DESGLOSE DE BILLETES<br>`;
+    desgloseTill.innerHTML = `DESGLOSE DE BILLETES<br>-------------------------<br>`;
     for (i = 0; i < 6; i++) {
       if (bilAmt[i] === 0 || bilAmt[i] === "0" || bilAmt[i] === "") {
       } else if (bilAmt[i] == 1) {
@@ -112,10 +112,49 @@ function tillCalc() {
         );
       }
     }
-    desgloseTill.insertAdjacentHTML("beforeend", "---------------<br>");
     desgloseTill.insertAdjacentHTML(
       "beforeend",
-      `Suma de Billetes: ${bil.reduce((partialSum, a) => partialSum + a, 0)}€.`
+      "-------------------------<br>"
+    );
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      `Suma de Billetes: ${bil.reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      )}€.<br><br>`
+    );
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      "DESGLOSE DE MONEDAS <br> -------------------------<br>"
+    );
+    for (i = 0; i < 8; i++) {
+      if (coinAmt[i] === 0 || coinAmt[i] === "0" || coinAmt[i] === "") {
+      } else if (coinAmt[i] == 1) {
+        desgloseTill.insertAdjacentHTML(
+          "beforeend",
+          `- ${coinAmt[i]} moneda y ${modsAmt[i]}Rl. de ${coinName[i]} = ${eur[i]}€.<br>`
+        );
+      } else {
+        desgloseTill.insertAdjacentHTML(
+          "beforeend",
+          `- ${coinAmt[i]} monedas y ${modsAmt[i]}Rl. de ${coinName[i]} = ${eur[i]}€.<br>`
+        );
+      }
+    }
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      "-------------------------<br>"
+    );
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      `Suma de Monedas: ${roundTo(
+        eur.reduce((partialSum, a) => partialSum + a, 0),
+        2
+      )}€.<br><br>`
+    );
+    desgloseTill.insertAdjacentHTML(
+      "beforeend",
+      `TOTAL DESGLOSE: ${moneyTotal}€.<br>`
     );
   }
   // Aquí se calcula la diferencia y los billetes/monedas a entregar.
